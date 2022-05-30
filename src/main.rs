@@ -10,9 +10,9 @@ mod shop;
 mod strings;
 
 pub enum FightResult {
-    Win, 
-    Loss, 
-    Tie, 
+    Win,
+    Loss,
+    Tie,
     Draw,
 }
 

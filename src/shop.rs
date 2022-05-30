@@ -26,7 +26,31 @@ impl Shop {
     /// this store wins, FightResult::Loss if this store loses, and a
     /// FightResult::Tie if both stores win the same number of battles.
     pub fn fight_store(&self, other: &Shop) -> FightResult {
-        todo!()
+        let mut self_win = 0;
+        let mut other_win = 0;
+        for card1 in self.cards.iter() {
+            for card2 in other.cards.iter() {
+                match card1.fight(card2) {
+                    FightResult::Win => self_win += 1,
+                    FightResult::Loss => other_win += 1,
+                    FightResult::Tie => {
+                        self_win += 1;
+                        other_win += 1;
+                    }
+                    FightResult::Draw => {
+                        self_win += 1;
+                        other_win += 1;
+                    }
+                }
+            }
+        }
+        match self_win > other_win {
+            true => FightResult::Win,
+            false => match self_win == other_win {
+                true => FightResult::Tie,
+                false => FightResult::Loss,
+            },
+        }
     }
 }
 
